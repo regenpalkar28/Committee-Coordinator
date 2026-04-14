@@ -18,6 +18,7 @@ const BullhornIcon = () => (
 );
 
 function Welcome() {
+  console.log(committees);
   return (
     <div className="welcome-container-aesthetic">
       
@@ -82,22 +83,37 @@ function Welcome() {
           <p>Choose your committee to log in and access your dashboard.</p>
         </div>
         <div className="committee-grid">
-          {committees.map((committee, index) => (
-            <Link
-              to={`/login/${committee.id}`}
-              className="committee-card-aesthetic"
-              key={committee.id}
-              data-aos="fade-up" // Staggered animation
-              data-aos-delay={index * 50}
-            >
-              <div className="card-aesthetic-logo">
-                <img src={committee.logo} alt={committee.name} />
+          {committees.map((committee) => (
+              <div
+                className="committee-card-wrapper"
+                key={committee.id}
+                // data-aos="fade-up"
+                // data-aos-delay={index * 50}
+              >
+                <Link
+                  to={`/login/${committee.id}`}
+                  className="committee-card-aesthetic"
+                  
+                >
+                  {/* Front */}
+                  <div className="card-front">
+                    <div className="card-aesthetic-logo">
+                      <img src={committee.logo} alt={committee.name} />
+                    </div>
+                    <div className="card-aesthetic-name">
+                      <h3>{committee.name}</h3>
+                    </div>
+                  </div>
+
+                  {/* Back */}
+                  <div className="card-back">
+                    <h3>{committee.name}</h3>
+                    <p>{committee.description}</p>
+                    <span className="card-back-cta">Apply →</span>
+                  </div>
+                </Link>
               </div>
-              <div className="card-aesthetic-name">
-                <h3>{committee.name}</h3>
-              </div>
-            </Link>
-          ))}
+            ))}
         </div>
       </section>
     </div>
